@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+<body>
+
+  <div class="barchartbox">
+    <canvas class="barcharts" id="Gaziantep" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Urfa" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Diyarbakır" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Adıyaman" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Batman" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Kilis" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Mardin" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Siirt" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Şırnak" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    </div>
+
+<script>
+// Ankete dair veriler
+const anketVerileri = `
+Diyarbakır,4065,2.83,0.0,27.45,0.0,58.16,5.08,1.41,2.39,0.0
+Mardin,2580,0.84,0.0,40.31,0.42,48.72,7.2,2.09,0.0,0.0
+Urfa,2420,5.0,0.0,32.0,2.0,24.0,3.0,4.0,29.0,0.0
+`;
+
+const parsedAnketVerileri = anketVerileri.trim().split('\n').map(line => {
+  const [şehir, örneklem, CHP, MHP, AKP, İYİ, DEM, Diğerleri, Kararsız, YRP, ZP] = line.split(',');
+  return { şehir, örneklem, CHP: parseFloat(CHP), MHP: parseFloat(MHP), AKP: parseFloat(AKP), İYİ: parseFloat(İYİ), DEM: parseFloat(DEM), Diğerleri: parseFloat(Diğerleri), Kararsız: parseFloat(Kararsız), YRP: parseFloat(YRP), ZP: parseFloat(ZP) };
+});
+
+// Seçim sonuçları verileri
+const bölgeVerileri = [
+  {
+    bölge: "Diyarbakır",
+    seçimSonuçları: [16.8, 0, 3.5, 0.4, 64.1, 7.3],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Mardin",
+    seçimSonuçları: [27.8, 0, 2.5, 0.6, 57.4, 4.5],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Urfa",
+    seçimSonuçları: [33.6, 0, 1.5, 0.5, 21.2, 38.9],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Gaziantep",
+    seçimSonuçları: [38.8, 0, 28.1, 1.7, 0, 17.2],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Kilis",
+    seçimSonuçları: [27.3, 23.7, 42, 1.2, 0.2, 2.3],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Siirt",
+    seçimSonuçları: [37.1, 0, 1.9, 0.7, 49.6, 2.6],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Şırnak",
+    seçimSonuçları: [47.6, 0, 4, 0, 41, 3.3],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Van",
+    seçimSonuçları: [27.1, 0, 2.7, 0.6, 55.5, 5.4],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "YRP"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#FFFF00"]
+  },
+  {
+    bölge: "Batman",
+    seçimSonuçları: [12.4, 0, 1.8, 0.4, 64.5, 15.7],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Diğer"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#808080"]
+  },
+  {
+    bölge: "Adıyaman",
+    seçimSonuçları: [27.4, 0, 49.7, 0.8, 2.7, 13.7],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Diğer"],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A020F0", "#808080"]
+  }
+];
+
+// Anket sonuçlarını bölge verilerine ekleyelim
+bölgeVerileri.forEach(bölge => {
+  const anket = parsedAnketVerileri.find(item => item.şehir === bölge.bölge);
+  if (anket) {
+    bölge.anketSonuçları = [anket.AKP, anket.MHP, anket.CHP, anket.İYİ, anket.DEM, anket.YRP];
+  }
+});
+
+bölgeVerileri.forEach(bölge => {
+  const dataSets = [
+    {
+      label: "Seçim Sonuçları",
+      backgroundColor: bölge.barColors,
+      data: bölge.seçimSonuçları
+    }
+  ];
+
+  if (bölge.anketSonuçları) {
+    dataSets.push({
+      label: "Anket Sonuçları",
+      backgroundColor: bölge.barColors.map(color => color + "B3"), // Transparan renk
+      data: bölge.anketSonuçları
+    });
+  }
+
+  new Chart(document.getElementById(bölge.bölge), {
+    type: "bar",
+    data: {
+      labels: bölge.xValues,
+      datasets: dataSets
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: `${bölge.bölge} Bölgesi Seçim ve Anket Sonuçları`
+      },
+      plugins: {
+        datalabels: {
+          display: true,
+          align: 'end',
+          anchor: 'end',
+          formatter: (value, context) => {
+            return value + '%';
+          }
+        }
+      }
+    }
+  });
+});
+
+function showChart(selectElement) {
+  var canvasElements = document.getElementsByClassName('barcharts');
+  for (var i = 0; i < canvasElements.length; i++) {
+    canvasElements[i].style.display = 'none';
+  }
+  var selectedChart = document.getElementById(selectElement.value);
+  if (selectedChart) {
+    selectedChart.style.display = 'block';
+  }
+}
+</script>
+
+<select id="chartSelector" onchange="showChart(this)">
+  <option value="">İl Seçiniz</option>
+  <option value="Diyarbakır">Diyarbakır</option>
+  <option value="Mardin">Mardin</option>
+  <option value="Urfa">Urfa</option>
+  <option value="Gaziantep">Gaziantep</option>
+  <option value="Kilis">Kilis</option>
+  <option value="Siirt">Siirt</option>
+  <option value="Şırnak">Şırnak</option>
+  <option value="Van">Van</option>
+  <option value="Batman">Batman</option>
+  <option value="Adıyaman">Adıyaman</option>
+</select>
+
+</body>
+</html>

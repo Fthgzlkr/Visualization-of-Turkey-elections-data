@@ -1,0 +1,186 @@
+
+
+#selectionResult {
+  position: fixed;
+  top: 100;
+  right: 250; ;
+}
+
+#selectionResult3{
+  position: fixed;
+  top: 100;
+  left: 100;
+}
+
+
+.selectionTable table {
+  width: 50%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  
+}
+.selectionTable tr:hover {
+  background-color: #e9ecef;
+}
+
+.selectionTable table,
+.selectionTable th,
+.selectionTable td {
+  border: 0.5px solid black;
+  padding: 2px;
+}
+
+.selectionTable th {
+  background-color: #f2f2f2;
+}
+
+.barchartbox{
+  height: 300px;
+  width: 400px;
+  top: 550;
+  left: 200;
+  position:absolute;
+}
+
+.piechartbox{
+  width: 300;
+  position: fixed;
+  top: 180; /* Sayfanın üstünden 0 piksel uzaklıkta sabit */
+  right: 200;
+  
+}
+
+
+
+
+.btn-warning{ 
+  position: fixed;
+  top:550;
+  right: 200;
+}
+
+#selectionResult2{
+  position: fixed;
+  top:560;
+  right: 320;
+}
+
+
+@media screen and (max-width: 768px) {
+ 
+}
+
+.btn btn-success{
+  position: fixed;
+  left: 0;
+}
+
+
+
+
+
+svg{
+  max-width: 500px;
+ 
+}
+
+/* styles.css */
+.selectionTable {
+  position: fixed;
+  width: 10%;
+  top: 250;
+  left: 150;
+}
+
+.selectionTable table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.selectionTable th,
+.selectionTable td {
+  border: 0.5px solid #ddd;
+  font: 1em sans-serif;
+  text-align: left;
+}
+
+.selectionTable th {
+  background-color: #f2f2f2;
+}
+
+.selectionTable table th.CHP,
+.selectionTable table td.CHP { background-color: #da2121; }
+
+.selectionTable table th.MHP,
+.selectionTable table td.MHP { background-color: #2c7fdf; }
+
+.selectionTable table th.AKP,
+.selectionTable table td.AKP { background-color: #ffae4b; }
+
+.selectionTable table th.İYİ,
+.selectionTable table td.İYİ { background-color: #b1e4ef; }
+
+.selectionTable table th.DEM,
+.selectionTable table td.DEM { background-color: #8E44AD; }
+
+.selectionTable table th.Diğerleri,
+.selectionTable table td.Diğerleri { background-color: #ffffff; }
+
+.selectionTable table th.Kararsız,
+.selectionTable table td.Kararsız { background-color: #ffffff; }
+
+.selectionTable table th.YRP,
+.selectionTable table td.YRP { background-color: #ebb6b0; }
+
+.selectionTable table th.ZP,
+.selectionTable table td.ZP { background-color: #ac1515; }
+
+
+
+.wikitable{
+  margin-left: 800px;
+  padding-top: 30px;
+}
+
+.wikitable th,
+.wikitable td{
+  border: 1.2px solid #ddd;
+  font-weight: bold;
+  font: 1em sans-serif;
+  text-align: center; 
+  padding: 1px;
+  
+}
+
+.wikitable tr:hover {
+  background-color: #e9ecef;
+}
+
+.wikitable #İstanbul{
+    font: 0.5em sans-serif;
+    padding: 0.5px;
+    border: 0.6px solid #ddd;
+    
+}
+
+.wikitable #Ankara{
+  font: 0.2em sans-serif;
+  padding: 0px;
+  border: 0.2px solid #ddd;
+}
+
+
+/* Tüm g elementleri için hover efekti */
+g:hover polygon {
+  fill: #e0e0e0; /* Orijinal rengin biraz daha açık tonu */
+}
+
+/* Metinlerin hover durumunda değişmemesi için */
+g text {
+  pointer-events: none; /* Bu, text elementlerinin hover efektinden etkilenmesini engeller */
+}
+
+
+body{
+  background-color: #F1F1F1;
+}

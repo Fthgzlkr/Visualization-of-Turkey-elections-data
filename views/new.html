@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="barchartbox">
+        <canvas class="barcharts" id="Van" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Erzurum" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Malatya" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Ağrı" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Ardahan" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Bingöl" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Bitlis" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Elazığ" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Erzincan" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Hakkari" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Iğdır" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Kars" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Muş" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Tunceli" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>    
+    </div>
+
+<script>
+  const anketVerileri = `
+  Elazığ,1160,24.6,11.5,36.1,5.5,0.0,3.0,7.4,11.9,0.0
+Erzurum,4793,7.41,0.0,67.75,11.61,8.2,3.96,1.06,0.0,0.0
+Kars,2365,14.11,20.8,0.0,27.87,25.46,7.48,4.28,0.0,0.0
+Malatya,5836,20.67,0.0,56.75,2.26,0.0,4.26,1.57,12.65,0.0
+Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
+
+`;
+
+  const parsedAnketVerileri = anketVerileri.trim().split('\n').map(line => {
+    const [şehir, örneklem, CHP, MHP, AKP, İYİ, DEM, Diğerleri, Kararsız, YRP, ZP] = line.split(',');
+    return { şehir, örneklem, CHP: parseFloat(CHP), MHP: parseFloat(MHP), AKP: parseFloat(AKP), İYİ: parseFloat(İYİ), DEM: parseFloat(DEM), Diğerleri: parseFloat(Diğerleri), Kararsız: parseFloat(Kararsız), YRP: parseFloat(YRP), ZP: parseFloat(ZP) };
+  });
+
+  const bölgeVerileri = [
+  
+  {
+    bölge: "Van",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [27.1, 0, 2.7, 0.6, 55.5, 5.4],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Erzurum",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Zafer Partisi"],
+    yValues: [50.4, 0, 6.5, 22.2, 7.8, 5.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#000000"]
+  },
+  {
+    bölge: "Malatya",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [49, 0, 37.3, 0.5, 0.5, 9.4],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Ağrı",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [33.7, 0, 2.6, 1, 51.1, 4.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Ardahan",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEVA"],
+    yValues: [43.5, 0, 45.1, 0.6, 6.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#FF7F7F"]
+  },
+  {
+    bölge: "Bingöl",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [33.7, 0, 2.3, 0.4, 25.9, 21.2],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Bitlis",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [38.2, 0, 2.1, 1.4, 37.4, 7.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Elazığ",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [38.2, 10.9, 16.5, 0.6, 2.3, 21.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Erzincan",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "Bağımsız"],
+    yValues: [0, 40.4, 21.1, 1.6, 29.2],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A9A9A9"]
+  },
+  {
+    bölge: "Hakkari",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [46.6, 0, 1.4, 0.4, 48.9, 0.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Iğdır",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "Y. Refah"],
+    yValues: [42.2, 0, 2.9, 4.5, 46.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#FFFF00"]
+  },
+  {
+    bölge: "Kars",
+    xValues: ["MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [0, 36.2, 17.2, 9.2, 29, 3.6],
+    barColors: ["#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Malatya",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [49, 0, 37.3, 0.5, 0.5, 9.4],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Muş",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [25.3, 0, 1.5, 4.6, 42.9, 12.9],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Tunceli",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "Bağımsız"],
+    yValues: [13.3, 0, 33.3, 0.7, 40.2, 8.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#A9A9A9"]
+  },
+  {
+    bölge: "Van",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
+    yValues: [27.1, 0, 2.7, 0.6, 55.5, 5.4],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  }
+  ];
+
+
+  bölgeVerileri.forEach(bölge => {
+    const anket = parsedAnketVerileri.find(item => item.şehir === bölge.bölge);
+    if (anket) {
+      bölge.anketSonuçları = [anket.AKP, anket.MHP, anket.CHP, anket.İYİ, anket.DEM, anket.YRP];
+    }
+  });
+
+  bölgeVerileri.forEach(bölge => {
+    const dataSets = [
+      {
+        label: "Seçim Sonuçları",
+        backgroundColor: bölge.barColors,
+        data: bölge.seçimSonuçları
+      }
+    ];
+
+    if (bölge.anketSonuçları) {
+      dataSets.push({
+        label: "Anket Sonuçları",
+        backgroundColor: bölge.barColors.map(color => color + "B3"), // Transparan renk
+        data: bölge.anketSonuçları
+      });
+    }
+
+    new Chart(document.getElementById(bölge.bölge), {
+      type: "bar",
+      data: {
+        labels: bölge.xValues,
+        datasets: dataSets
+      },
+      options: {
+        legend: { display: true },
+        title: {
+          display: true,
+          text: `${bölge.bölge} Bölgesi Seçim ve Anket Sonuçları`
+        },
+        plugins: {
+          datalabels: {
+            display: true,
+            align: 'end',
+            anchor: 'end',
+            formatter: (value, context) => {
+              return value + '%';
+            }
+          }
+        }
+      }
+    });
+  });
+
+  function showChart(selectElement) {
+    var canvasElements = document.getElementsByClassName('barcharts');
+    for (var i = 0; i < canvasElements.length; i++) {
+      canvasElements[i].style.display = 'none';
+    }
+    var selectedChart = document.getElementById(selectElement.value);
+    if (selectedChart) {
+      selectedChart.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
+

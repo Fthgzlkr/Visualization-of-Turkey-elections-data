@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+  <div class="barchartbox">
+    <canvas class="barcharts" id="Samsun" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Ordu" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Trabzon" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Amasya" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Artvin" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Bartın" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Bayburt" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Bolu" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Çorum" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Düzce" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Giresun" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Rize" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Sinop" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Tokat" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Kastamonu" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Karabük" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Gümüşhane" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+    <canvas class="barcharts" id="Zonguldak" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+</div>
+
+
+<script>
+// Ankete dair veriler
+const anketVerileri = `
+Bolu,5545,56.09,10.89,27.11,2.38,0.0,1.85,0.0,1.68,0.0
+Düzce,1150,0.0,11.3,35.5,10.6,0.0,4.6,0.0,23.5,0.0
+Giresun,3432,42.82,0.0,45.05,4.15,0.0,4.1,0.0,3.53,0.0
+Ordu,23432,15.05,0.0,41.72,35.55,0.0,2.9,2.53,2.25,0.0
+Samsun,22222,22.16,0.0,43.76,20.35,0.0,4.4,1.26,7.58,0.0
+Sinop,1206,46.1,0.0,35.8,10.2,0.0,5.8,0.0,2.1,0.0
+Tokat,1878,11.0,44.7,37.3,2.4,0.0,1.2,0.0,3.4,0.0
+Trabzon,8497,21.94,0.0,54.39,9.78,0.0,4.25,2.88,6.77,0.0
+Zonguldak,1428,43.8,0.0,39.5,5.8,0.0,4.7,0.0,6.2,0.0
+`;
+
+const parsedAnketVerileri = anketVerileri.trim().split('\n').map(line => {
+  const [şehir, örneklem, CHP, MHP, AKP, İYİ, DEM, Diğerleri, Kararsız, YRP, ZP] = line.split(',');
+  return { şehir, örneklem, CHP: parseFloat(CHP), MHP: parseFloat(MHP), AKP: parseFloat(AKP), İYİ: parseFloat(İYİ), DEM: parseFloat(DEM), Diğerleri: parseFloat(Diğerleri), Kararsız: parseFloat(Kararsız), YRP: parseFloat(YRP), ZP: parseFloat(ZP) };
+});
+
+// Seçim sonuçları verileri
+const bölgeVerileri = [
+  {
+    bölge: "Samsun",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [42.2, 0, 27, 14.1, 0.1, 12.5],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Ordu",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [40.1, 0, 16.6, 36.5, 0.1, 3.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Trabzon",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [51.5, 0, 28.5, 4.2, 0.2, 9.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Amasya",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [29, 23, 43, 0.7, 0.1, 2.3],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Artvin",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [43.7, 0, 45.2, 6, 0.2, 1.9],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Bartın",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [0, 36.6, 51.3, 2.7, 0.2, 4.6],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Bayburt",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [39.1, 37.9, 4.3, 1.3, 0.2, 8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Bolu",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [28.8, 12.1, 52.9, 0.9, 0.6, 2.2],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Çorum",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [40.6, 0, 37, 1.7, 0.2, 14.5],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Düzce",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [40.2, 4.1, 13.4, 6.1, 0.6, 29.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Giresun",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [37.6, 0, 54.6, 1.3, 0.1, 2.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Gümüşhane",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [38.2, 41.6, 13.4, 1.2, 0.1, 1.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Rize",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [54.7, 0, 12.1, 6.4, 0.2, 17.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Sinop",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [39.4, 0, 49.4, 4.9, 0.1, 2.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Tokat",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [30.2, 54.9, 9.4, 1.3, 0.1, 1.9],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Kastamonu",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [36.2, 6.9, 49.2, 0.8, 0.1, 3.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Karabük",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [33.7, 26.3, 11.1, 1.2, 0.2, 22.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Zonguldak",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "HDP", "Y. Refah Partisi"],
+    yValues: [37.6, 0, 54.5, 0.9, 0.1, 2.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  }
+];
+
+// Anket sonuçlarını bölge verilerine ekleyelim
+bölgeVerileri.forEach(bölge => {
+  const anket = parsedAnketVerileri.find(item => item.şehir === bölge.bölge);
+  if (anket) {
+    bölge.anketSonuçları = [anket.AKP, anket.MHP, anket.CHP, anket.İYİ, anket.YRP, anket.ZP];
+  }
+});
+
+// Chart oluşturma
+bölgeVerileri.forEach(bölge => {
+  const dataSets = [
+  {
+    label: 'Seçim Sonuçları',
+    backgroundColor: bölge.barColors.map(color => color + "FF"), // Koyu renk
+    data: bölge.yValues
+  }
+];
+
+if (bölge.anketSonuçları) {
+  dataSets.push({
+    label: 'Anket Sonuçları',
+    backgroundColor: bölge.barColors.map(color => color + "99"), // Daha soluk renk
+    data: bölge.anketSonuçları
+  });
+}
+
+
+
+  new Chart(document.getElementById(bölge.bölge), {
+    type: "bar",
+    data: {
+      labels: bölge.xValues,
+      datasets: dataSets
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: `${bölge.bölge} Bölgesi Seçim ve Anket Sonuçları`
+      },
+      plugins: {
+        datalabels: {
+          display: true,
+          align: 'end',
+          anchor: 'end',
+          formatter: (value, context) => {
+            return value + '%';
+          }
+        }
+      }
+    }
+  });
+});
+
+function showChart(selectElement) {
+  var canvasElements = document.getElementsByClassName('barcharts');
+  for (var i = 0; i < canvasElements.length; i++) {
+    canvasElements[i].style.display = 'none';
+  }
+  var selectedChart = document.getElementById(selectElement.value);
+  if (selectedChart) {
+    selectedChart.style.display = 'block';
+  }
+}
+</script>
+
+
+
+</body>
+</html>

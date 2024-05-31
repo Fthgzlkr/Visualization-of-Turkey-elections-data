@@ -1,0 +1,830 @@
+<%- include("partials/indexheader.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Bilgileri</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+   
+</head>
+<body>
+
+   
+    <h3 id="selectionResult"></h3>
+    <h3 id="selectionResult3"></h3>
+    <h4 id="selectionResult2"></h4>
+ 
+    <div id="marmaraTable" class="selectionTable" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th class="Şehir">Şehir</th>
+            <th class="Örneklem">Örneklem</th>
+            <th class="CHP">CHP</th>
+            <th class="MHP">MHP</th>
+            <th class="AKP">AKP</th>
+            <th class="İYİ">İYİ</th>
+            <th class="DEM">DEM</th>
+            <th class="Diğerleri">Diğerleri</th>
+            <th class="Kararsız">Kararsız</th>
+            <th class="YRP">YRP</th>
+            <th class="ZP">ZP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="Şehir">İstanbul</td>
+            <td class="Örneklem">116399</td>
+            <td class="CHP">41.43</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">40.58</td>
+            <td class="İYİ">3.09</td>
+            <td class="DEM">4.0</td>
+            <td class="Diğerleri">3.57</td>
+            <td class="Kararsız">3.35</td>
+            <td class="YRP">2.43</td>
+            <td class="ZP">1.38</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Bilecik</td>
+            <td class="Örneklem">1280</td>
+            <td class="CHP">40.70</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">39.20</td>
+            <td class="İYİ">3.80</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">2.90</td>
+            <td class="Kararsız">8.30</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Bursa</td>
+            <td class="Örneklem">37840</td>
+            <td class="CHP">41.09</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">39.53</td>
+            <td class="İYİ">3.82</td>
+            <td class="DEM">0.94</td>
+            <td class="Diğerleri">4.56</td>
+            <td class="Kararsız">0.00</td>
+            <td class="YRP">5.06</td>
+            <td class="ZP">1.89</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Çanakkale</td>
+            <td class="Örneklem">4060</td>
+            <td class="CHP">36.28</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">22.55</td>
+            <td class="İYİ">32.57</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">5.96</td>
+            <td class="Kararsız">2.68</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Kırklareli</td>
+            <td class="Örneklem">1600</td>
+            <td class="CHP">40.00</td>
+            <td class="MHP">36.7</td>
+            <td class="AKP">0.00</td>
+            <td class="İYİ">3.60</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">11.60</td>
+            <td class="Kararsız">8.10</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Sakarya</td>
+            <td class="Örneklem">1560</td>
+            <td class="CHP">17.00</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">57.00</td>
+            <td class="İYİ">8.00</td>
+            <td class="DEM">3.00</td>
+            <td class="Diğerleri">8.00</td>
+            <td class="Kararsız">0.00</td>
+            <td class="YRP">7.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Tekirdağ</td>
+            <td class="Örneklem">11536</td>
+            <td class="CHP">35.56</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">29.84</td>
+            <td class="İYİ">9.22</td>
+            <td class="DEM">5.33</td>
+            <td class="Diğerleri">18.15</td>
+            <td class="Kararsız">1.76</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Yalova</td>
+            <td class="Örneklem">1105</td>
+            <td class="CHP">36.70</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">40.40</td>
+            <td class="İYİ">0.00</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">9.50</td>
+            <td class="Kararsız">13.40</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Edirne</td>
+            <td class="Örneklem">4945</td>
+            <td class="CHP">22.09</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">31.29</td>
+            <td class="İYİ">30.96</td>
+            <td class="DEM">0.0</td>
+            <td class="Diğerleri">8.65</td>
+            <td class="Kararsız">7.01</td>
+            <td class="YRP">0.0</td>
+            <td class="ZP">0.0</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Balıkesir</td>
+            <td class="Örneklem">16294</td>
+            <td class="CHP">45.08</td>
+            <td class="MHP">0.0</td>
+            <td class="AKP">41.69</td>
+            <td class="İYİ">5.78</td>
+            <td class="DEM">1.2</td>
+            <td class="Diğerleri">3.39</td>
+            <td class="Kararsız">0.3</td>
+            <td class="YRP">2.43</td>
+            <td class="ZP">0.0</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+
+    <div id="akdenizTable" class="selectionTable" style= "display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th class="Şehir">Şehir</th>
+            <th class="Örneklem">Örneklem</th>
+            <th class="CHP">CHP</th>
+            <th class="MHP">MHP</th>
+            <th class="AKP">AKP</th>
+            <th class="İYİ">İYİ</th>
+            <th class="DEM">DEM</th>
+            <th class="Diğerleri">Diğerleri</th>
+            <th class="Kararsız">Kararsız</th>
+            <th class="YRP">YRP</th>
+            <th class="ZP">ZP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="Şehir">Adana</td>
+            <td class="Örneklem">19314</td>
+            <td class="CHP">43.51</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">37.57</td>
+            <td class="İYİ">8.47</td>
+            <td class="DEM">4.38</td>
+            <td class="Diğerleri">4.86</td>
+            <td class="Kararsız">1.22</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Antalya</td>
+            <td class="Örneklem">25038</td>
+            <td class="CHP">40.27</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">41.41</td>
+            <td class="İYİ">6.17</td>
+            <td class="DEM">4.95</td>
+            <td class="Diğerleri">4.09</td>
+            <td class="Kararsız">0.00</td>
+            <td class="YRP">1.42</td>
+            <td class="ZP">1.31</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Burdur</td>
+            <td class="Örneklem">1200</td>
+            <td class="CHP">41.50</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">39.60</td>
+            <td class="İYİ">13.40</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">5.50</td>
+            <td class="Kararsız">0.00</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">0.00</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Gaziantep</td>
+            <td class="Örneklem">2860</td>
+            <td class="CHP">20.63</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">54.26</td>
+            <td class="İYİ">2.38</td>
+            <td class="DEM">6.69</td>
+            <td class="Diğerleri">5.57</td>
+            <td class="Kararsız">2.38</td>
+            <td class="YRP">6.67</td>
+            <td class="ZP">1.43</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Hatay</td>
+            <td class="Örneklem">29890</td>
+            <td class="CHP">40.73</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">46.34</td>
+            <td class="İYİ">1.25</td>
+            <td class="DEM">0.45</td>
+            <td class="Diğerleri">4.08</td>
+            <td class="Kararsız">0.80</td>
+            <td class="YRP">1.32</td>
+            <td class="ZP">0.37</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Isparta</td>
+            <td class="Örneklem">3497</td>
+            <td class="CHP">13.33</td>
+            <td class="MHP">15.97</td>
+            <td class="AKP">29.05</td>
+            <td class="İYİ">23.88</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">3.45</td>
+            <td class="Kararsız">4.67</td>
+            <td class="YRP">0.00</td>
+            <td class="ZP">9.68</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Kahramanmaraş</td>
+            <td class="Örneklem">5800</td>
+            <td class="CHP">19.90</td>
+            <td class="MHP">0.00</td>
+            <td class="AKP">54.55</td>
+            <td class="İYİ">4.30</td>
+            <td class="DEM">0.00</td>
+            <td class="Diğerleri">6.61</td>
+            <td class="Kararsız">0.00</td>
+            <td class="YRP">9.71</td>
+            <td class="ZP">1.22</td>
+          </tr>
+          <tr>
+            <td class="Şehir">Mersin</td>
+            <td class="Örneklem">5934</td>
+            <td class="CHP">51.05</td>
+            <td class="MHP">36.58</td>
+            <td class="AKP">0.00</td>
+            <td class="İYİ">4.12</td>
+            <td class="DEM">1.21</td>
+            <td class="Diğerleri">3.29</td>
+            <td class="Kararsız">1.16</td>
+            <td class="YRP">1.49</td>
+            <td class="ZP">1.33</td>
+          </tr>
+        </tbody>
+      </table>
+      
+  </div>
+  
+
+    <div id="karadenizTable" class="selectionTable" style="display:none;">
+        <!-- Karadeniz Tablosu -->
+        <table>
+          <thead>
+            <tr>
+              <td class="Şehir">Düzce</td>
+              <td class="Örneklem">1150</td>
+              <td class="CHP">0.0</td>
+              <td class="MHP">11.3</td>
+              <td class="AKP">35.5</td>
+              <td class="İYİ">10.6</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">4.6</td>
+              <td class="Kararsız">0.0</td>
+              <td class="YRP">23.5</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            
+            <tr>
+              <th class="Şehir">Şehir</th>
+              <th class="Örneklem">Örneklem</th>
+              <th class="CHP">CHP</th>
+              <th class="MHP">MHP</th>
+              <th class="AKP">AKP</th>
+              <th class="İYİ">İYİ</th>
+              <th class="DEM">DEM</th>
+              <th class="Diğerleri">Diğerleri</th>
+              <th class="Kararsız">Kararsız</th>
+              <th class="YRP">YRP</th>
+              <th class="ZP">ZP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Şehir">Bolu</td>
+              <td class="Örneklem">5545</td>
+              <td class="CHP">56.09</td>
+              <td class="MHP">10.89</td>
+              <td class="AKP">27.11</td>
+              <td class="İYİ">2.38</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">1.85</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">1.68</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Giresun</td>
+              <td class="Örneklem">3432</td>
+              <td class="CHP">42.82</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">45.05</td>
+              <td class="İYİ">4.15</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">4.10</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">3.53</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Ordu</td>
+              <td class="Örneklem">23432</td>
+              <td class="CHP">15.05</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">41.72</td>
+              <td class="İYİ">35.55</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">2.90</td>
+              <td class="Kararsız">2.53</td>
+              <td class="YRP">2.25</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Samsun</td>
+              <td class="Örneklem">22222</td>
+              <td class="CHP">22.16</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">43.76</td>
+              <td class="İYİ">20.35</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">4.40</td>
+              <td class="Kararsız">1.26</td>
+              <td class="YRP">7.58</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Sinop</td>
+              <td class="Örneklem">1206</td>
+              <td class="CHP">46.10</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">35.80</td>
+              <td class="İYİ">10.20</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">5.80</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">2.10</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Tokat</td>
+              <td class="Örneklem">1878</td>
+              <td class="CHP">11.00</td>
+              <td class="MHP">44.70</td>
+              <td class="AKP">37.30</td>
+              <td class="İYİ">2.40</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">1.20</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">3.40</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Trabzon</td>
+              <td class="Örneklem">8497</td>
+              <td class="CHP">21.94</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">54.39</td>
+              <td class="İYİ">9.78</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">4.25</td>
+              <td class="Kararsız">2.88</td>
+              <td class="YRP">6.77</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Zonguldak</td>
+              <td class="Örneklem">1428</td>
+              <td class="CHP">43.80</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">39.50</td>
+              <td class="İYİ">5.80</td>
+              <td class="DEM">0.0</td>
+              <td class="Diğerleri">4.70</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">6.20</td>
+              <td class="ZP">0.0</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+    <div id="icAnadoluTable" class="selectionTable" style="display:none;">
+        <!-- İç Anadolu Tablosu -->
+        <table>
+          <thead>
+            <tr>
+              <th class="Şehir">Şehir</th>
+              <th class="Örneklem">Örneklem</th>
+              <th class="CHP">CHP</th>
+              <th class="MHP">MHP</th>
+              <th class="AKP">AKP</th>
+              <th class="İYİ">İYİ</th>
+              <th class="DEM">DEM</th>
+              <th class="Diğerleri">Diğerleri</th>
+              <th class="Kararsız">Kararsız</th>
+              <th class="YRP">YRP</th>
+              <th class="ZP">ZP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Şehir">Ankara</td>
+              <td class="Örneklem">36941</td>
+              <td class="CHP">49.69</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">35.96</td>
+              <td class="İYİ">3.68</td>
+              <td class="DEM">1.15</td>
+              <td class="Diğerleri">3.40</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">2.38</td>
+              <td class="ZP">1.26</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Eskişehir</td>
+              <td class="Örneklem">7194</td>
+              <td class="CHP">40.16</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">41.35</td>
+              <td class="İYİ">9.33</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">4.81</td>
+              <td class="Kararsız">0.96</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">3.20</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Kayseri</td>
+              <td class="Örneklem">11530</td>
+              <td class="CHP">14.17</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">55.01</td>
+              <td class="İYİ">12.66</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">6.73</td>
+              <td class="Kararsız">2.82</td>
+              <td class="YRP">7.92</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Kırıkkale</td>
+              <td class="Örneklem">5003</td>
+              <td class="CHP">30.53</td>
+              <td class="MHP">30.09</td>
+              <td class="AKP">27.32</td>
+              <td class="İYİ">4.90</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">4.61</td>
+              <td class="Kararsız">3.03</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Konya</td>
+              <td class="Örneklem">13957</td>
+              <td class="CHP">8.14</td>
+              <td class="MHP">5.86</td>
+              <td class="AKP">47.41</td>
+              <td class="İYİ">4.86</td>
+              <td class="DEM">0.84</td>
+              <td class="Diğerleri">13.29</td>
+              <td class="Kararsız">5.12</td>
+              <td class="YRP">14.13</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Nevşehir</td>
+              <td class="Örneklem">2620</td>
+              <td class="CHP">14.23</td>
+              <td class="MHP">16.54</td>
+              <td class="AKP">25.65</td>
+              <td class="İYİ">32.89</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">7.37</td>
+              <td class="Kararsız">3.33</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Nigde</td>
+              <td class="Örneklem">1500</td>
+              <td class="CHP">13.50</td>
+              <td class="MHP">14.90</td>
+              <td class="AKP">54.30</td>
+              <td class="İYİ">14.00</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">2.50</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">2.20</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Sivas</td>
+              <td class="Örneklem">1400</td>
+              <td class="CHP">13.80</td>
+              <td class="MHP">11.20</td>
+              <td class="AKP">36.20</td>
+              <td class="İYİ">0.00</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">4.10</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.00</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+    <div id="egeTable" class="selectionTable" style="display:none;">
+        <!-- Ege Tablosu -->
+        <table>
+          <thead>
+           
+            <tr>
+              <th class="Şehir">Şehir</th>
+              <th class="Örneklem">Örneklem</th>
+              <th class="CHP">CHP</th>
+              <th class="MHP">MHP</th>
+              <th class="AKP">AKP</th>
+              <th class="İYİ">İYİ</th>
+              <th class="DEM">DEM</th>
+              <th class="Diğerleri">Diğerleri</th>
+              <th class="Kararsız">Kararsız</th>
+              <th class="YRP">YRP</th>
+              <th class="ZP">ZP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Şehir">Aydın</td>
+              <td class="Örneklem">12420</td>
+              <td class="CHP">41.17</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">39.69</td>
+              <td class="İYİ">7.17</td>
+              <td class="DEM">4.41</td>
+              <td class="Diğerleri">2.85</td>
+              <td class="Kararsız">2.01</td>
+              <td class="YRP">1.18</td>
+              <td class="ZP">1.52</td>
+            </tr>
+            
+            <tr>
+              <td class="Şehir">Denizli</td>
+              <td class="Örneklem">11290</td>
+              <td class="CHP">38.18</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">41.75</td>
+              <td class="İYİ">8.30</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">6.71</td>
+              <td class="Kararsız">4.12</td>
+              <td class="YRP">0.95</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">İzmir</td>
+              <td class="Örneklem">29755</td>
+              <td class="CHP">42.74</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">34.13</td>
+              <td class="İYİ">8.09</td>
+              <td class="DEM">5.76</td>
+              <td class="Diğerleri">3.00</td>
+              <td class="Kararsız">3.52</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">2.74</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Manisa</td>
+              <td class="Örneklem">19917</td>
+              <td class="CHP">39.30</td>
+              <td class="MHP">42.68</td>
+              <td class="AKP">0.00</td>
+              <td class="İYİ">6.26</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">4.62</td>
+              <td class="Kararsız">1.85</td>
+              <td class="YRP">3.23</td>
+              <td class="ZP">0.00</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Muğla</td>
+              <td class="Örneklem">9856</td>
+              <td class="CHP">38.48</td>
+              <td class="MHP">0.00</td>
+              <td class="AKP">33.15</td>
+              <td class="İYİ">15.62</td>
+              <td class="DEM">2.24</td>
+              <td class="Diğerleri">7.73</td>
+              <td class="Kararsız">2.77</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.00</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+    <div id="doguAnadoluTable" class="selectionTable" style="display:none;">
+        <!-- Doğu Anadolu Tablosu -->
+        <table>
+          <thead>
+            <tr>
+              <th class="Şehir">Şehir</th>
+              <th class="Örneklem">Örneklem</th>
+              <th class="CHP">CHP</th>
+              <th class="MHP">MHP</th>
+              <th class="AKP">AKP</th>
+              <th class="İYİ">İYİ</th>
+              <th class="DEM">DEM</th>
+              <th class="Diğerleri">Diğerleri</th>
+              <th class="Kararsız">Kararsız</th>
+              <th class="YRP">YRP</th>
+              <th class="ZP">ZP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Şehir">Elazığ</td>
+              <td class="Örneklem">1160</td>
+              <td class="CHP">24.60</td>
+              <td class="MHP">11.5</td>
+              <td class="AKP">36.10</td>
+              <td class="İYİ">5.50</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">3.00</td>
+              <td class="Kararsız">7.40</td>
+              <td class="YRP">11.90</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Erzurum</td>
+              <td class="Örneklem">4793</td>
+              <td class="CHP">7.41</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">67.75</td>
+              <td class="İYİ">11.61</td>
+              <td class="DEM">8.20</td>
+              <td class="Diğerleri">3.96</td>
+              <td class="Kararsız">1.06</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Kars</td>
+              <td class="Örneklem">2365</td>
+              <td class="CHP">14.11</td>
+              <td class="MHP">20.8</td>
+              <td class="AKP">0.00</td>
+              <td class="İYİ">27.87</td>
+              <td class="DEM">25.46</td>
+              <td class="Diğerleri">7.48</td>
+              <td class="Kararsız">4.28</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Malatya</td>
+              <td class="Örneklem">5836</td>
+              <td class="CHP">20.67</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">56.75</td>
+              <td class="İYİ">2.26</td>
+              <td class="DEM">0.00</td>
+              <td class="Diğerleri">4.26</td>
+              <td class="Kararsız">1.57</td>
+              <td class="YRP">12.65</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Şehir">Van</td>
+              <td class="Örneklem">1420</td>
+              <td class="CHP">3.00</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">31.00</td>
+              <td class="İYİ">3.00</td>
+              <td class="DEM">48.00</td>
+              <td class="Diğerleri">10.00</td>
+              <td class="Kararsız">0.00</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.0</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+    <div id="guneydoguAnadoluTable" class="selectionTable" style="display:none;">
+        <!-- Güneydoğu Anadolu Tablosu -->
+        <table>
+          <thead>
+            <tr>
+              <th>Şehir</th>
+              <th>Örneklem</th>
+              <th>CHP</th>
+              <th>MHP</th>
+              <th>AKP</th>
+              <th>İYİ</th>
+              <th>DEM</th>
+              <th>Diğerleri</th>
+              <th>Kararsız</th>
+              <th>YRP</th>
+              <th>ZP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="Diyarbakır">Diyarbakır</td>
+              <td>4065</td>
+              <td class="CHP">2.83</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">27.45</td>
+              <td class="İYİ">0.00</td>
+              <td class="DEM">58.16</td>
+              <td class="Diğerleri">5.08</td>
+              <td class="Kararsız">1.41</td>
+              <td class="YRP">2.39</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Mardin">Mardin</td>
+              <td>2580</td>
+              <td class="CHP">0.84</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">40.31</td>
+              <td class="İYİ">0.42</td>
+              <td class="DEM">48.72</td>
+              <td class="Diğerleri">7.20</td>
+              <td class="Kararsız">2.09</td>
+              <td class="YRP">0.00</td>
+              <td class="ZP">0.0</td>
+            </tr>
+            <tr>
+              <td class="Urfa">Urfa</td>
+              <td>2420</td>
+              <td class="CHP">5.00</td>
+              <td class="MHP">0.0</td>
+              <td class="AKP">32.00</td>
+              <td class="İYİ">2.00</td>
+              <td class="DEM">24.00</td>
+              <td class="Diğerleri">3.00</td>
+              <td class="Kararsız">4.00</td>
+              <td class="YRP">29.00</td>
+              <td class="ZP">0.0</td>
+            </tr>
+          </tbody>
+        </table>
+        
+    </div>
+
+  
+   
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-marmara"  onclick="goToRegionPage('marmara')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-akdeniz"  onclick="goToRegionPage('akdeniz')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-karadeniz"  onclick="goToRegionPage('karadeniz')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-icAnadolu"  onclick="goToRegionPage('icAnadolu')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-ege"  onclick="goToRegionPage('ege')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-doguAnadolu"  onclick="goToRegionPage('doguAnadolu')">tablolar</button>
+     <button type="button" class="btn btn-warning btn-lg" style="display: none;" id="btn-iller-guneydoguAnadolu"  onclick="goToRegionPage('guneydoguAnadolu')">tablolar</button>
+     
+     
+     <%- include("partials/piecharts.ejs") %>
+     <script src="/main.js"></script>
+
+  <%- include("partials/footer.ejs") %>
+</body>
+  
+</html>

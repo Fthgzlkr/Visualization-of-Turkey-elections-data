@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles/style.css">
+  
+<body>
+<div class="piechartbox">
+  <canvas class="piecharts" id="icAnadoluCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="marmaraCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="egeCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="guneydoguAnadoluCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="doguAnadoluCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="karadenizCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+  <canvas class="piecharts" id="akdenizCanvas" style="width:70%;max-width:500px; display: none;"></canvas>
+</div>
+
+<script>
+
+  areas=["İç Anadolu","Marmara","Ege","Güney Doğu Anadolu","Doğu Anadolu","Karadeniz","Akdeniz"]
+var bölgeVerileri = [
+  {
+    bölge: "icAnadoluCanvas",
+    xValues: ["CHP", "AKP", "YREFAH", "İYİP", "MHP"],
+    yValues: [40.8, 36.1, 8.9, 4.1, 2.7],
+    barColors: ["#b91d47", "#FFA500", "#FF7F7F", "#00FFFF", "#00008B"]
+  },
+  {
+    bölge: "marmaraCanvas",
+    xValues: ["CHP", "AKP", "YREFAH", "ZAFER", "DEM"],
+    yValues: [47.2, 39.9, 3.7, 2.2, 2.1],
+    barColors: ["#b91d47", "#FFA500", "#FF7F7F", "#e8c3b9", "#6C3483"]
+  },
+  {
+    bölge: "egeCanvas",
+    xValues: ["CHP", "AKP", "MHP", "İYİP", "DEM"],
+    yValues: [50.4, 30.5, 5.7, 4.4, 2.6],
+    barColors: ["#b91d47", "#FFA500", "#00008B", "#00FFFF", "#6C3483"]
+  },
+  {
+    bölge: "guneydoguAnadoluCanvas",
+    xValues: ["DEM", "AKP", "YREFAH", "CHP", "HÜDA"],
+    yValues: [32.5, 29.6, 16.9, 11.5, 3.7],
+    barColors: ["#6C3483", "#FFA500", "#FF7F7F", "#b91d47", "#1e7145"]
+  },
+  {
+    bölge: "doguAnadoluCanvas",
+    xValues: ["AKP", "DEM", "CHP", "YREFAH", "İYİP"],
+    yValues: [37.1, 23.1, 14.2, 6.9, 5.4],
+    barColors: ["#FFA500", "#6C3483", "#b91d47", "#FF7F7F", "#00FFFF"]
+  },
+  {
+    bölge: "karadenizCanvas",
+    xValues: ["AKP", "CHP", "İYİP", "YREFAH", "MHP"],
+    yValues: [41, 27.9, 12.2, 9.4, 4.9],
+    barColors: ["#FFA500", "#b91d47", "#00FFFF", "#FF7F7F", "#00008B"]
+  },
+  {
+    bölge: "akdenizCanvas",
+    xValues: ["CHP", "AKP", "MHP", "YREFAH", "İYİP"],
+    yValues: [44.8, 31.7,7.2, 5.1, 4],
+    barColors: ["#b91d47", "#FFA500", "#00008B", "#FF7F7F", "#00FFFF"]
+  }
+];
+
+for (var i = 0; i < bölgeVerileri.length; i++) {
+  new Chart(bölgeVerileri[i].bölge, {
+    type: "pie",
+    data: {
+      labels: bölgeVerileri[i].xValues,
+      datasets: [{
+        backgroundColor: bölgeVerileri[i].barColors,
+        data: bölgeVerileri[i].yValues
+      }]
+    },
+    plugins: [ChartDataLabels], // plugins eklentisini burada tanımlayın
+    options: {
+      plugins: {
+        datalabels: {
+          color: '#fff', // etiket rengi
+          anchor: 'end', // etiketin konumu (başlangıç, orta, son)
+          align: 'start', // hizalama (başlangıç, orta, son)
+          offset: 5, // etiketin şekil dışındaki uzaklığı
+          formatter: function(value, context) {
+            return value; // etiketin formatı
+          }
+        }
+      }
+    }
+  });
+}
+
+</script>
+
+</body>
+</html>

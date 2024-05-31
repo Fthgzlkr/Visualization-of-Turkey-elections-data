@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="barchartbox">
+        <canvas class="barcharts" id="İzmir" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
+        <canvas class="barcharts" id="Manisa" style="width:70%;max-width:500px;max-height: 500px;display: none; "></canvas>
+        <canvas class="barcharts" id="Afyonkarahisar" style="width:70%;max-width:500px;max-height: 500px;display: none; "></canvas>
+        <canvas class="barcharts" id="Aydın" style="width:70%;max-width:500px; max-height: 500px;display: none;"></canvas>
+        <canvas class="barcharts" id="Denizli" style="width:70%;max-width:500px; max-height: 500px;display: none;"></canvas>
+        <canvas class="barcharts" id="Kütahya" style="width:70%;max-width:500px; max-height: 500px;display: none;"></canvas>
+        <canvas class="barcharts" id="Muğla" style="width:70%;max-width:500px; max-height: 500px;display: none;"></canvas>
+        <canvas class="barcharts" id="Uşak" style="width:70%;max-width:500px; max-height: 500px;display: none;"></canvas>
+        
+    </div>
+
+<script>
+  const anketVerileri = `
+Aydın,12420,41.17,0.0,39.69,7.17,4.41,2.85,2.01,1.18,1.52
+Denizli,11290,38.18,0.0,41.75,8.3,0.0,6.71,4.12,0.95,0.0
+İzmir,29755,42.74,0.0,34.13,8.09,5.76,3.0,3.52,0.0,2.74
+Manisa,19917,39.3,42.68,0.0,6.26,0.0,4.62,1.85,3.23,0.0
+Muğla,9856,38.48,0.0,33.15,15.62,2.24,7.73,2.77,0.0,0.0
+
+`;
+
+  const parsedAnketVerileri = anketVerileri.trim().split('\n').map(line => {
+    const [şehir, örneklem, CHP, MHP, AKP, İYİ, DEM, Diğerleri, Kararsız, YRP, ZP] = line.split(',');
+    return { şehir, örneklem, CHP: parseFloat(CHP), MHP: parseFloat(MHP), AKP: parseFloat(AKP), İYİ: parseFloat(İYİ), DEM: parseFloat(DEM), Diğerleri: parseFloat(Diğerleri), Kararsız: parseFloat(Kararsız), YRP: parseFloat(YRP), ZP: parseFloat(ZP) };
+  });
+
+  const bölgeVerileri = [
+  {
+    bölge: "İzmir",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Zafer Partisi"],
+    seçimSonuçları: [37.1, 0, 49, 3.6, 4.2, 2.5],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Manisa",
+    xValues: ["MHP", "CHP", "İYİ", "DEM", "Y. Refah Partisi", "Zafer Partisi"],
+    seçimSonuçları: [0,57.3, 29.8,4.9, 0, 3.5],
+    barColors: ["#00008B", "#b91d47", "#00FFFF", "#008000", "#FF7F7F", "#FFFF00"]
+  },
+  {
+    bölge: "Afyonkarahisar",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah Partisi"],
+    seçimSonuçları: [31.8, 10.9, 50.7, 1.6, 0.1, 2.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FF7F7F"]
+  },
+  {
+    bölge: "Aydın",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Zafer Partisi"],
+    seçimSonuçları: [36.7, 0, 50.5, 4.3, 3.4, 1.6],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Denizli",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah Partisi"],
+    seçimSonuçları: [38.9, 0, 48.1, 4.6, 1.1, 2.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FF7F7F"]
+  },
+  {
+    bölge: "Muğla",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Zafer Partisi"],
+    seçimSonuçları: [32.7, 0, 55, 5.7, 1.8, 1.8],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+  },
+  {
+    bölge: "Uşak",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah Partisi"],
+    seçimSonuçları: [24.3, 12.6, 40.9, 16.8, 0.6, 1.7],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FF7F7F"]
+  },
+  {
+    bölge: "Kütahya",
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah Partisi"],
+    seçimSonuçları: [27.7, 29.3, 29.7, 1.8, 0.1, 8.1],
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FF7F7F"]
+  }
+  ];
+
+
+  bölgeVerileri.forEach(bölge => {
+    const anket = parsedAnketVerileri.find(item => item.şehir === bölge.bölge);
+    if (anket) {
+      bölge.anketSonuçları = [anket.AKP, anket.MHP, anket.CHP, anket.İYİ, anket.DEM, anket.YRP];
+    }
+  });
+
+  bölgeVerileri.forEach(bölge => {
+    const dataSets = [
+      {
+        label: "Seçim Sonuçları",
+        backgroundColor: bölge.barColors,
+        data: bölge.seçimSonuçları
+      }
+    ];
+
+    if (bölge.anketSonuçları) {
+      dataSets.push({
+        label: "Anket Sonuçları",
+        backgroundColor: bölge.barColors.map(color => color + "B3"), // Transparan renk
+        data: bölge.anketSonuçları
+      });
+    }
+
+    new Chart(document.getElementById(bölge.bölge), {
+      type: "bar",
+      data: {
+        labels: bölge.xValues,
+        datasets: dataSets
+      },
+      options: {
+        legend: { display: true },
+        title: {
+          display: true,
+          text: `${bölge.bölge} Bölgesi Seçim ve Anket Sonuçları`
+        },
+        plugins: {
+          datalabels: {
+            display: true,
+            align: 'end',
+            anchor: 'end',
+            formatter: (value, context) => {
+              return value + '%';
+            }
+          }
+        }
+      }
+    });
+  });
+
+  function showChart(selectElement) {
+    var canvasElements = document.getElementsByClassName('barcharts');
+    for (var i = 0; i < canvasElements.length; i++) {
+      canvasElements[i].style.display = 'none';
+    }
+    var selectedChart = document.getElementById(selectElement.value);
+    if (selectedChart) {
+      selectedChart.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
+
