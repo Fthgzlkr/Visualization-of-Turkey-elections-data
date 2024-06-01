@@ -7,6 +7,7 @@ function showSelection(region) {
         tables[i].style.display = "none";
     }
     // Seçilen bölgeye göre tabloyu göster
+   
     document.getElementById(region + "Table").style.display = "block";
     // Seçim sonucunu göster
     document.getElementById('selectionResult').textContent = region.charAt(0).toUpperCase() + region.slice(1) + ' Bölgesi Seçim Sonuçları';
@@ -18,6 +19,7 @@ function showSelection(region) {
         illerButtons[j].style.display = "none";
     }
     document.getElementById('btn-iller-' + region).style.display = "block";
+    
 
     var canvases = document.getElementsByClassName("piecharts");
 for (var i = 0; i < canvases.length; i++) {
@@ -30,7 +32,7 @@ if (canvasToShow) {
   canvasToShow.style.display = "block";
   // Burada ilgili canvas'a Chart.js kullanarak grafik oluşturabilirsiniz, eğer gerekiyorsa
 }
-
+document.getElementById('indexh1').style.display = 'none';
 }
 
 function goToRegionPage(region) {

@@ -184,3 +184,18 @@ g text {
 body{
   background-color: #F1F1F1;
 }
+
+#surveytables{
+ position: absolute;
+ right: 300;
+ 
+}
+#selectionDatas{
+  position: absolute;
+  left: 100;
+}
+#indexh1{
+  position: absolute;
+  left: 500;
+  top: 100;
+}

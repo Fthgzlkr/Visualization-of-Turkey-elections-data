@@ -22,4 +22,9 @@ function toggleTable(city_id) {
   if (canvasToShow) {
       canvasToShow.style.display = "block";
   }
+
+  document.getElementById('selectionDatas').textContent=city_id + ' İli veri Karşılaştırması';
+  document.getElementById('surveytables').textContent=city_id + ' İli Anket Tablosu';
+  
+
 }

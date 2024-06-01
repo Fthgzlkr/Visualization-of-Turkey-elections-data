@@ -1,0 +1,56 @@
+<footer class="footer bg-dark">
+    <div class="container text-center">
+        <span class="text-muted">
+            &copy; <span id="current-year"></span> My Website
+        </span>
+        <a href="https://github.com/" target="_blank" class="text-white mx-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width="20" height="20">
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" class="text-white mx-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="20" height="20">
+        </a>
+    </div>
+</footer>
+
+<script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+<style>
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    body {
+        margin-bottom: 60px; /* Footer height */
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    @media (max-width: 767.98px) { 
+        .footer {
+            position: relative;
+        }
+    }
+
+    /* Hover effects */
+    .footer a {
+        color: white;
+        margin: 0 15px; /* Sağ ve sol margin değerleri artırıldı */
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: #ffcc00;
+    }
+</style>

@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <h3 id="selectionDatas"></h3>
+  <h3 id="surveytables"></h3>
 
     <div class="barchartbox">
         <canvas class="barcharts" id="Van" style="width:70%;max-width:500px; max-height: 500px; display: none;"></canvas>
@@ -28,7 +30,7 @@
   const anketVerileri = `
   Elazığ,1160,24.6,11.5,36.1,5.5,0.0,3.0,7.4,11.9,0.0
 Erzurum,4793,7.41,0.0,67.75,11.61,8.2,3.96,1.06,0.0,0.0
-Kars,2365,14.11,20.8,0.0,27.87,25.46,7.48,4.28,0.0,0.0
+Kars,2365,27.87,0.0,20.8,25.46,14.11,7.48,4.28,0.0,0.0
 Malatya,5836,20.67,0.0,56.75,2.26,0.0,4.26,1.57,12.65,0.0
 Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
 
@@ -45,25 +47,25 @@ Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
     bölge: "Van",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [27.1, 0, 2.7, 0.6, 55.5, 5.4],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Erzurum",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Zafer Partisi"],
     seçimSonuçları: [50.4, 0, 6.5, 22.2, 7.8, 5.1],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#000000"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#000000"]
   },
   {
     bölge: "Malatya",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [49, 0, 37.3, 0.5, 0.5, 9.4],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Ağrı",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [33.7, 0, 2.6, 1, 51.1, 4.7],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Ardahan",
@@ -75,19 +77,19 @@ Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
     bölge: "Bingöl",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [33.7, 0, 2.3, 0.4, 25.9, 21.2],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Bitlis",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [38.2, 0, 2.1, 1.4, 37.4, 7.7],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Elazığ",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [38.2, 10.9, 16.5, 0.6, 2.3, 21.1],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Erzincan",
@@ -99,31 +101,31 @@ Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
     bölge: "Hakkari",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [46.6, 0, 1.4, 0.4, 48.9, 0.7],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Iğdır",
-    xValues: ["AKP", "MHP", "CHP", "İYİ", "Y. Refah"],
+    xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM"],
     seçimSonuçları: [42.2, 0, 2.9, 4.5, 46.7],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080"]
   },
   {
     bölge: "Kars",
     xValues: ["MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
-    seçimSonuçları: [0, 36.2, 17.2, 9.2, 29, 3.6],
-    barColors: ["#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    seçimSonuçları: [36.2, 0,  17.2, 9.2, 29, 3.6],
+    barColors: ["#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Malatya",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [49, 0, 37.3, 0.5, 0.5, 9.4],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Muş",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [25.3, 0, 1.5, 4.6, 42.9, 12.9],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   },
   {
     bölge: "Tunceli",
@@ -135,7 +137,7 @@ Van,1420,3.0,0.0,31.0,3.0,48.0,10.0,0.0,0.0,0.0
     bölge: "Van",
     xValues: ["AKP", "MHP", "CHP", "İYİ", "DEM", "Y. Refah"],
     seçimSonuçları: [27.1, 0, 2.7, 0.6, 55.5, 5.4],
-    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#008000", "#FFFF00"]
+    barColors: ["#FFA500", "#00008B", "#b91d47", "#00FFFF", "#800080", "#FFFF00"]
   }
   ];
 
